@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import useDebounce from "../(hooks)/useDebounce";
 
 type Product = {
   Sr_No: number;
@@ -38,6 +39,7 @@ function Product() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedQuery = useDebounce(searchQuery, 300);
 
   useEffect(() => {
     fetch("/ProductList.json")
@@ -47,12 +49,16 @@ function Product() {
   }, []);
 
   const filteredProducts = products.filter((product) => {
-    const query = searchQuery.toLowerCase();
+    const query = debouncedQuery.toLowerCase();
 
     return (
-      product["GenericName"].toLowerCase().includes(query) ||
-      String(product["DrugCode"]).toLowerCase().includes(query) ||
-      product["GroupName"].toLowerCase().includes(query)
+      product["GenericName"]
+        .toLowerCase()
+        .includes(debouncedQuery.toLowerCase()) ||
+      String(product["DrugCode"])
+        .toLowerCase()
+        .includes(debouncedQuery.toLowerCase()) ||
+      product["GroupName"].toLowerCase().includes(debouncedQuery.toLowerCase())
     );
   });
 
@@ -74,6 +80,23 @@ function Product() {
     (page) =>
       page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1
   );
+
+  function highlightMatch(text: string, query: string) {
+    if (!query) return text;
+
+    const regex = new RegExp(`(${query})`, "gi");
+    const parts = text.split(regex);
+
+    return parts.map((part, index) =>
+      part.toLowerCase() === query.toLowerCase() ? (
+        <mark key={index} className="bg-yellow-200 text-black rounded-sm px-1">
+          {part}
+        </mark>
+      ) : (
+        <span key={index}>{part}</span>
+      )
+    );
+  }
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -101,11 +124,17 @@ function Product() {
         <TableBody>
           {paginatedProducts.map((product, index) => (
             <TableRow key={index}>
-              <TableCell>{product["DrugCode"]}</TableCell>
-              <TableCell>{product["GenericName"]}</TableCell>
+              <TableCell>
+                {highlightMatch(String(product["DrugCode"]), searchQuery)}
+              </TableCell>
+              <TableCell>
+                {highlightMatch(product["GenericName"], searchQuery)}
+              </TableCell>
               <TableCell>{product["UnitSize"]}</TableCell>
               <TableCell>{product["MRP"]}</TableCell>
-              <TableCell>{product["GroupName"]}</TableCell>
+              <TableCell>
+                {highlightMatch(product["GroupName"], searchQuery)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
