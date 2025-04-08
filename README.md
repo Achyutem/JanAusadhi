@@ -1,8 +1,12 @@
- # Jan Aushadhi App – Open-Source Catalog for Affordable Medicines
+# Jan Aushadhi App – Open-Source Catalog for Affordable Medicines
 
-**Jan Aushadhi App** is a fast, lightweight, and installable web app (PWA) built to support the Indian Government’s *Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP)* by offering a seamless way to explore generic medicines through an ad-free, distraction-free experience.
+**Jan Aushadhi App** is a fast, lightweight, and installable web app (PWA) built to support the Indian Government’s _Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP)_ by offering a seamless way to explore generic medicines through an ad-free, distraction-free experience.
 
 > This application is **not affiliated with the government**, but is built as a public service to improve accessibility to the Jan Aushadhi medicine catalog.
+
+## Try the App
+
+[Jan Ausadhi](https://achyutem.github.io/JanAusadhi/?ref=github)
 
 ## Features
 
@@ -16,15 +20,16 @@
 - Works offline after installation
 - Lightweight and mobile-friendly experience
 
+## Preview
+
+![Preview](./public/preview.png)
+
 ## Benefits
 
 - Makes generic medicine information under PMBJP easily accessible
 - Suitable for users in low-bandwidth or rural internet areas
 - Offers a smooth alternative to bulky, ad-heavy websites
 - Can be installed and used like a native app
-
-## Try the App
-[Jan Ausadhi](https://achyutem.github.io/JanAusadhi/?ref=github)
 
 ## About the Project
 
