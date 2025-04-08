@@ -1,5 +1,17 @@
 import { renderProduct } from "./components/productCard.js";
 
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+const referralSource = getQueryParam("ref");
+if (referralSource) {
+  gtag("event", "custom_referral", {
+    referral_source: referralSource,
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   let products = [];
   let currentPage = 1;
