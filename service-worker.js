@@ -1,12 +1,12 @@
 const CACHE_NAME = "jan-ausadhi-v1";
 const ASSETS_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/styles.css",
-  "/app.js",
-  "/ProductList.json",
-  "/public/icon-192x192.png",
-  "/public/icon-512x512.png",
+  "./",
+  "./index.html",
+  "./styles.css",
+  "./app.js",
+  "./ProductList.json",
+  "./public/icon-192x192.png",
+  "./public/icon-512x512.png",
   "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap",
   "https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js",
 ];

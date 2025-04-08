@@ -1,39 +1,23 @@
 {
   "name": "Jan Ausadhi",
-  "short_name": "med lookup",
-  "description": "Find affordable medicines at Jan Ausadhi stores",
-  "start_url": "index.html",
+  "short_name": "Jan Ausadhi",
+  "description": "Jan Ausadhi medication information app",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#fafafa",
+  "background_color": "#ffffff",
   "theme_color": "#4361ee",
-  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "public/icon-192x192.png",
-      "type": "image/png",
+      "src": "./public/icon-192x192.png",
       "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "public/icon-512x512.png",
-      "type": "image/png",
+      "src": "./public/icon-512x512.png",
       "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "categories": ["health", "medical", "utility"],
-  "shortcuts": [
-    {
-      "name": "Search Medicines",
-      "short_name": "Search",
-      "description": "Search for medicines in the Jan Ausadhi catalog",
-      "url": "/index.html",
-      "icons": [
-        {
-          "src": "/public/icon-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
     }
   ]
 }
