@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jan Ausadhi</title>
+
+    <link rel="icon" href="/public/icon-192x192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/public/icon-192x192.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta name="theme-color" content="#4361ee" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Jan Ausadhi" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 aria-label="Jan Ausadhi" class="title">Jan Ausadhi</h1>
+        <button
+          title="toggle theme"
+          aria-label="toggle theme"
+          id="themeToggle"
+          class="theme-toggle"
+        >
+          🌙
+        </button>
+      </div>
+
+      <div class="search-container">
+        <svg
+          class="search-icon"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          id="search"
+          type="text"
+          placeholder="Search by name, drug code, group..."
+          class="search-input"
+        />
+      </div>
+
+      <table class="product-table fade-in">
+        <thead>
+          <tr>
+            <th>Drug Code</th>
+            <th>Generic Name</th>
+            <th>MRP</th>
+            <th>Group</th>
+          </tr>
+        </thead>
+        <tbody id="product-list"></tbody>
+      </table>
+
+      <div class="bottom-controls">
+        <div class="pagination-settings">
+          <label for="items-per-page">Show</label>
+          <select id="items-per-page" class="select">
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="20">50</option>
+          </select>
+          <span>items per page</span>
+        </div>
+        <div id="pagination" class="pagination"></div>
+      </div>
+    </div>
+    <noscript>
+      <div
+        style="
+          background-color: #f8d7da;
+          color: #721c24;
+          padding: 1rem;
+          margin: 1rem;
+          border-radius: 0.5rem;
+          text-align: center;
+        "
+      >
+        This application requires JavaScript to be enabled in your browser.
+      </div>
+    </noscript>
+    <script src="pwa.js" defer></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
