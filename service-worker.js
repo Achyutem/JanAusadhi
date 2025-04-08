@@ -1,4 +1,3 @@
-// service-worker.js
 const CACHE_NAME = "jan-ausadhi-v1";
 const ASSETS_TO_CACHE = [
   "/",
