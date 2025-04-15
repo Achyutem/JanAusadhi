@@ -11,8 +11,9 @@ export function renderProduct(product, query = "") {
     <tr>
       <td>${highlight(String(product["DrugCode"]))}</td>
       <td>${highlight(product["GenericName"])}</td>
-      <td>₹${product.MRP}</td>
+      <td>₹${product.MRP} for ${product["UnitSize"]}</td>
       <td>${product["GroupName"]}</td>
+      <td>${product["comparePrice"]}  for ${product["compareQuant"]} </td>
     </tr>
   `;
 }
