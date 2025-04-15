@@ -48,7 +48,7 @@ body {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -63,7 +63,7 @@ body {
 .title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--fg);
+  color: var(--primary);
   margin: 0;
 }
 
@@ -416,4 +416,12 @@ mark {
   to {
     transform: rotate(360deg);
   }
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--fg);
+  margin-top: 1rem;
+  padding-right: 1rem;
 }
