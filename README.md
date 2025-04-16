@@ -19,6 +19,7 @@
 - Installable as a Progressive Web App (PWA)
 - Works offline after installation
 - Lightweight and mobile-friendly experience
+- Price Comparison with Industry Pricing 
 
 ## Preview
 
