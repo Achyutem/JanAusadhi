@@ -42,25 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleBtn.textContent = theme === "dark" ? "☀️" : "🌙";
   }
 
-  let fuse;
-
   fetch("./ProductList.json")
     .then((res) => res.json())
     .then((data) => {
       products = data;
-
-      fuse = new Fuse(products, {
-        keys: ["GenericName", "DrugCode", "GroupName"],
-        threshold: 0.6,
-      });
-
       render();
     });
 
   searchInput.addEventListener(
     "input",
     debounce((e) => {
-      searchQuery = e.target.value;
+      searchQuery = e.target.value.trim();
       currentPage = 1;
       render();
     }, 300)
@@ -72,30 +64,95 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   });
 
-  function render() {
-    const filtered = searchQuery
-      ? fuse.search(searchQuery).map((result) => result.item)
-      : products;
+  function performSearch(query) {
+    if (!query) {
+      return products;
+    }
 
+    const lowerCaseQuery = query.toLowerCase();
+    const queryWords = lowerCaseQuery.split(/\s+/).filter(Boolean);
+
+    let exactMatches = [];
+    let startsWithMatches = [];
+    let wordMatches = [];
+    let containsMatches = [];
+
+    products.forEach(product => {
+      const genericName = product.GenericName.toLowerCase();
+      const drugCode = String(product.DrugCode).toLowerCase();
+      const groupName = product.GroupName.toLowerCase();
+
+      // Tier 1: Exact Match
+      if (drugCode === lowerCaseQuery || genericName === lowerCaseQuery) {
+        exactMatches.push(product);
+        return;
+      }
+      
+      // Tier 2: Starts With
+      if (genericName.startsWith(lowerCaseQuery) || drugCode.startsWith(lowerCaseQuery)) {
+        startsWithMatches.push(product);
+        return;
+      }
+
+      // Tier 3: Words Match
+      if (queryWords.every(word => 
+          genericName.split(/\s+/).includes(word) ||
+          groupName.split(/\s+/).includes(word)
+        )) {
+        wordMatches.push(product);
+        return;
+      }
+
+      // Tier 4: Substring/Contains Match (Fallback)
+      if (genericName.includes(lowerCaseQuery) || drugCode.includes(lowerCaseQuery) || groupName.includes(lowerCaseQuery)) {
+        containsMatches.push(product);
+      }
+    });
+
+    // Combine and deduplicate results, prioritizing tiers
+    const combinedResults = [
+      ...new Set([...exactMatches, ...startsWithMatches, ...wordMatches, ...containsMatches])
+    ];
+
+    return combinedResults;
+  }
+
+  function render() {
+    const filtered = performSearch(searchQuery);
     const totalPages = Math.ceil(filtered.length / itemsPerPage);
     const start = (currentPage - 1) * itemsPerPage;
     const currentItems = filtered.slice(start, start + itemsPerPage);
 
-    listContainer.innerHTML = currentItems
-      .map((p) => renderProduct(p, searchQuery))
-      .join("");
-
+    if (currentItems.length === 0) {
+      listContainer.innerHTML = `
+        <tr>
+          <td colspan="5" class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <path d="M15 3h6v6"></path>
+              <path d="M10 14L21 3"></path>
+            </svg>
+            <h3>No results found</h3>
+            <p>Try searching for a different medicine or group.</p>
+          </td>
+        </tr>
+      `;
+    } else {
+      listContainer.innerHTML = currentItems
+        .map((p) => renderProduct(p, searchQuery))
+        .join("");
+    }
+    
     renderPagination(totalPages);
   }
 
   function renderPagination(totalPages) {
     let pagesHtml = "";
-    const visiblePages = Array.from(
-      { length: totalPages },
-      (_, i) => i + 1
-    ).filter(
+    const visiblePages = Array.from({
+      length: totalPages
+    }, (_, i) => i + 1).filter(
       (page) =>
-        page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1
+      page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1
     );
 
     visiblePages.forEach((page, idx) => {
