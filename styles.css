@@ -1,34 +1,35 @@
 :root {
-  --primary: #4361ee;
-  --primary-light: #4895ef;
-  --primary-dark: #3f37c9;
-  --bg: #fafafa;
-  --fg: #1a1a1a;
+  --primary: #673ab7;
+  --primary-light: #9575cd;
+  --primary-dark: #311b92;
+  --bg: #f5f5f5;
+  --fg: #212121;
   --card-bg: #ffffff;
-  --border: #e6e6e6;
-  --muted: #64748b;
-  --input-bg: #f8fafc;
-  --input-border: #e2e8f0;
-  --highlight-bg: rgba(79, 70, 229, 0.1);
-  --highlight-color: #4361ee;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --border: #e0e0e0;
+  --muted: #757575;
+  --input-bg: #f5f5f5;
+  --input-border: #bdbdbd;
+  --highlight-bg: rgba(103, 58, 183, 0.1);
+  --highlight-color: #673ab7;
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 [data-theme="dark"] {
-  --primary: #60a5fa;
-  --primary-light: #93c5fd;
-  --primary-dark: #3b82f6;
-  --bg: #0f172a;
-  --fg: #f1f5f9;
-  --card-bg: #1e293b;
-  --border: #334155;
-  --muted: #94a3b8;
-  --input-bg: #1e293b;
-  --input-border: #334155;
-  --highlight-bg: rgba(96, 165, 250, 0.1);
-  --highlight-color: #60a5fa;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --primary: #bb86fc;
+  --primary-light: #cf9cff;
+  --primary-dark: #3700b3;
+  --bg: #121212;
+  --fg: #ffffff;
+  --card-bg: #1e1e1e;
+  --border: #333333;
+  --muted: #b0b0b0;
+  --input-bg: #2c2c2c;
+  --input-border: #444444;
+  --highlight-bg: rgba(187, 134, 252, 0.15);
+  --highlight-color: #bb86fc;
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-2: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.4);
 }
 
 * {
@@ -41,15 +42,12 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: "Lexend", sans-serif;
-  /* font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; */
-  margin: 0;
-  padding: 0;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
-  max-width: 100%;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -279,26 +277,17 @@ mark {
 }
 
 .drug-code {
-  font-family: "Inter", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   color: var(--muted);
   letter-spacing: 0.5px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  background-color: var(--highlight-bg);
-  color: var(--primary);
 }
 
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
   color: var(--muted);
+  vertical-align: middle;
 }
 
 .empty-state svg {
@@ -356,7 +345,7 @@ mark {
 
   .bottom-controls {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .pagination {
@@ -421,8 +410,8 @@ mark {
 
 .footer-note {
   text-align: center;
-  font-size: 0.85rem;
-  color: var(--fg);
-  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 1.5rem;
   padding-right: 1rem;
 }
